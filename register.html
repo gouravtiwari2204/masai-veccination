@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Masai-Vaccination</title>
+    <link rel="stylesheet" href="register.css">
+   
+</head>
+<body>
+ 
+    <nav id="navbar"></nav>
+    <h1 id="regtext">Registration Form</h1>
+    <div id="registration_details"> </div>
+    <h1 id="h1text">~~~~~~~~~~~Lets Get Vaccinated India~~~~~~~~~~~~</h1>
+    
+</body>
+
+<script>
+    let navbar = document.getElementById("navbar")
+    let detailsSection = document.getElementById("registration_details")
+    let alertText = document.getElementById("h1text")
+
+    navbar.innerHTML= `
+     <div id="registration"> 
+        <a href="">Registration </a> 
+    </div  >
+   
+    <div id="Dashboard"> 
+        <a href="">Dashboard </a> 
+    </div>
+    
+    <div id="Vaccinated"> 
+        <a href="">Vaccinated </a> 
+    </div>
+    `
+    
+
+    detailsSection.innerHTML = `
+    <form  id="form">
+           <input type="number"  id="id" placeholder="id"> <br>
+            <input type="text" id="name" placeholder="Name"> <br>
+         
+            <input type="number"  id="age" placeholder="Age"> <br>
+            
+           
+            
+            <select name="Designation" id="Designation" >
+                <option value=" ">Designation  </option>
+                <option value="Employee ">Employee </option>
+                <option value="Student">Student</option>
+                
+            </select> <br>
+
+           
+            <select name="Priority" id="Priority">
+                <option value="">Priority</option>
+                <option value="p0">p0</option>
+                <option value="p1">p1</option>
+                <option value="p2">p2</option>
+                <option value="p3">p3</option>
+              </select> <br>
+
+              <select name="Vaccine" id="Vaccine">
+                <option value=" ">Vaccine </option>
+                <option value="Covishield ">Covishield </option>
+                <option value="Covaxin ">Covaxin </option>
+                <option value="Sputnik">Sputnik</option>
+                
+              </select> <br>
+             
+              <input type="submit" value="Register" class="submitbtn"> 
+    </form>
+        `
+         
+        let myForm = document.getElementById("form")
+        let formData = []
+
+        myForm.addEventListener("submit", (e)=> {
+           e.preventDefault()
+           let data = {
+            id: form.id.value ,
+            name: form.name.value,
+            age: form.age.value ,
+            Designation:form.Designation.value ,
+            Priority: form.Priority.value,
+            Vaccine:form.Vaccine.value
+           }
+          if(data.name == "" || data.id == "" || data.age =="" || data.Designation==""||data.Priority==""|| data.Vaccine ==""){
+            alert("Please fill all details");
+          }
+           else if(data.name.length < 4 ){
+            alert("Name should be atleast 4 charachter");
+           }
+
+           else if(data.age < 18 ||  data.age >40){
+            alert("You are not elegible");
+           }
+           
+           else{
+            formData.push(data)
+            localStorage.setItem("vaccine-data",JSON.stringify(formData))
+            alert("Registration sucssefull")
+            alertText.innerText = "Sucssefully Resistered"
+           }
+          
+        })
+        
+       
+</script>
+</html>
