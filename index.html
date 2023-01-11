@@ -13,7 +13,7 @@
     <nav id="navbar"></nav>
     <h1 id="regtext">Registration Form</h1>
     <div id="registration_details"> </div>
-    <h1 id="h1text">~~~~~~~~~~~Lets Get Vaccinated India~~~~~~~~~~~~</h1>
+    <h1 id="h1text">~~~~~~~Lets Get Vaccinated India~~~~~~~~</h1>
     
 </body>
 
@@ -28,7 +28,7 @@
     </div  >
    
     <div id="Dashboard"> 
-        <a href="">Dashboard </a> 
+        <a href="Dashboard.html">Dashboard </a> 
     </div>
     
     <div id="Vaccinated"> 
@@ -73,7 +73,7 @@
               <input type="submit" value="Register" class="submitbtn"> 
     </form>
         `
-         
+         let userData =JSON.parse(localStorage.getItem("vaccine-data")) || []
         let myForm = document.getElementById("form")
         let formData = []
 

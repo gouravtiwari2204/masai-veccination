@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title>Vaccine_Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+  </head>
+  <body>
+    <nav id="navbar"></nav>
+
+    
+<!--     
+    <select id="filter">
+      <option value="">Select Priority</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+    </select>
+    <h1>Total Task:- <span id="task-count">0</span></h1> -->
+   <div id="container"> 
+    <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Designation</th>
+            <th>Priority</th>
+            <th>vaccine</th>
+            
+          </tr>
+        </thead>
+        <tbody id="dashboard_user_table">
+           <h1 id="regtext">Users Data</h1>
+          
+        </tbody>
+      </table>
+
+    </div>
+   
+  </body>
+
+  <script>
+     let navbar = document.getElementById("navbar")
+     let alertText = document.getElementById("h1text")
+
+     navbar.innerHTML= `
+     <div id="registration"> 
+        <a href="index.html">Registration </a> 
+    </div  >
+   
+    <div id="Dashboard"> 
+        <a href="Dashboard.html">Dashboard </a> 
+    </div>
+    
+    <div id="Vaccinated"> 
+        <a href="">Vaccinated </a> 
+    </div>
+    `
+
+
+    let userData = JSON.parse(localStorage.getItem("vaccine-data"))||[]
+  
+    let tBody = document.getElementById("dashboard_user_table")
+     function showUser(){
+        userData.map(element => {
+         let tr = document.createElement("tr")
+
+         let Id = document.createElement("td")
+         let Name = document.createElement("td")
+         let Age = document.createElement("td")
+         let Designation = document.createElement("td")
+         let Priority = document.createElement("td")
+         let vaccine = document.createElement("td")
+         let Add = document.createElement("button")
+         Add.className = "add"
+         let Delete = document.createElement("button")
+         Delete.className = "delete"
+
+
+         Id.innerText = element.id ;
+         Name.innerText= element.name;
+         Age.innerText = element.age;
+         Designation.innerText = element.Designation;
+         Priority.innerText = element.Priority;
+         vaccine.innerText = element.Vaccine;
+         Add.innerText = "Vaccinate"
+         Delete.innerText = "Delete"
+
+         tr.append(Id,Name,Age,Designation,Priority,vaccine,Add,Delete)
+         tBody.append(tr)
+
+          
+        });
+
+    
+       }
+       showUser()
+
+ </script>
+  
+</html>
