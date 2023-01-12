@@ -97,6 +97,10 @@
         userData = userData.filter((user)=> user.Vaccine =="Sputnik")
         showUser()
       }
+      else{
+        alert("Data Not Found")
+        window.location.href="Dashboard.html"
+      }
      
     })
     
@@ -127,7 +131,10 @@
         userData = userData.filter((user)=> user.Priority =="p3")
         showUser()
       }
-      
+      else{
+        alert("Data Not Found")
+        window.location.href="Dashboard.html"
+      }
     
     })
 
