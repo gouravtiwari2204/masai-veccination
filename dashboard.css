@@ -82,5 +82,33 @@ td{
     padding: 6px;
     border-radius: 5px;
  }
+ #vaccineFilter{
+
+    border: 0;
+    border-radius: 2px;
+    padding: 5px;
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+ }
+ #Priority{
+    border: 0;
+    border-radius: 2px;
+    padding: 5px;
+    background-color: teal;
+    color: white;
+    cursor: pointer;
+ }
+ #ageSort{
+    border: 0;
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 5px;
+    background-color: teal;
+    color: white;
+ }
+ option{
+    background-color: rgb(88, 86, 86); 
+ }
 
 

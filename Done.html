@@ -84,7 +84,7 @@
     function displayData(){
       tbody.innerHTML= null
       
-      vacData.map(element => {
+      vacData.forEach((element,index) => {
         
         let tr = document.createElement("tr")
 
@@ -101,11 +101,12 @@
          Designation.innerText = element.Designation;
          Priority.innerText = element.Priority;
          vaccine.innerText = element.Vaccine;
-
+        
          tr.append(Id,Name,Age,Designation,Priority,vaccine)
          tbody.append(tr)
-      });
-
+        
+      })
+     
     }
 
     displayData()

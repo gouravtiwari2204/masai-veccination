@@ -6,10 +6,10 @@
   <body>
     <nav id="navbar"></nav>
 
-   <select id="vaccineFilter">
+   <select name="vaccine" id="vaccineFilter">
       <option value="">Select Vaccine</option>
-      <option value="Covishield ">Covishield </option>
-      <option value="Medium">Covaxin </option>
+      <option value="Covishield">Covishield </option>
+      <option value="Covaxin">Covaxin </option>
       <option value="Sputnik">Sputnik</option>
     </select>
    
@@ -41,7 +41,7 @@
           </tr>
         </thead>
         <tbody id="dashboard_user_table">
-           <h1 id="regtext">Users Data</h1>
+           <h1 id="regtext">People In Queue</h1>
           
         </tbody>
       </table>
@@ -68,10 +68,85 @@
     </div>
     `
 
-    let vaccinated = []
+    
     let userData = JSON.parse(localStorage.getItem("userData"))||[]
   
     let tBody = document.getElementById("dashboard_user_table")
+
+    let vaccinated = []
+
+    let PrioritySelect = document.getElementById("Priority")
+
+    let Vselect = document.getElementById("vaccineFilter")
+
+    Vselect.addEventListener("change",()=>{
+      let value = Vselect.value
+       userData=JSON.parse(localStorage.getItem("userData"))
+
+       if(value =="Covishield"){
+        userData = userData.filter((user)=> user.Vaccine =="Covishield")
+        showUser()
+      }
+
+      if(value =="Covaxin"){
+        userData = userData.filter((user)=> user.Vaccine =="Covaxin")
+        showUser()
+      }
+
+      if(value =="Sputnik"){
+        userData = userData.filter((user)=> user.Vaccine =="Sputnik")
+        showUser()
+      }
+     
+    })
+    
+
+
+// filter part priprity
+    PrioritySelect.addEventListener("change",()=>{
+      let value = PrioritySelect.value
+
+      userData = JSON.parse(localStorage.getItem("userData"))
+
+      if(value =="p0"){
+        userData = userData.filter((user)=> user.Priority =="p0")
+        showUser()
+      }
+
+      if(value =="p1"){
+        userData = userData.filter((user)=> user.Priority =="p1")
+        showUser()
+      }
+
+      if(value =="p2"){
+        userData = userData.filter((user)=> user.Priority =="p2")
+        showUser()
+      }
+
+      if(value =="p3"){
+        userData = userData.filter((user)=> user.Priority =="p3")
+        showUser()
+      }
+      
+    
+    })
+
+
+  
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
      function showUser(){
       tBody.innerHTML = null
         userData.map((element,index)   => {
@@ -102,11 +177,11 @@
 
         Add.addEventListener("click",()=>{
           vaccinated.push(element)
-          console.log(vaccinated);
           localStorage.setItem("Vaccinated-list",JSON.stringify(vaccinated))
           
           userData.splice(index,1)
           localStorage.setItem("userData",JSON.stringify(userData))
+
           showUser()
           alert("Succsesfully vaccinated")
        })
@@ -120,8 +195,6 @@
 
          tr.append(Id,Name,Age,Designation,Priority,vaccine,Add,Delete)
          tBody.append(tr)
-
-          
         });
 
     
