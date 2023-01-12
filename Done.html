@@ -11,27 +11,27 @@
 
     <nav id="navbar"></nav>
 
-    <select id="vaccineFilter">
-       <option value="">Select Vaccine</option>
-       <option value="Covishield ">Covishield </option>
-       <option value="Medium">Covaxin </option>
-       <option value="Sputnik">Sputnik</option>
-     </select>
+   <select name="vaccine" id="vaccineFilter">
+      <option value="">Select Vaccine</option>
+      <option value="Covishield">Covishield </option>
+      <option value="Covaxin">Covaxin </option>
+      <option value="Sputnik">Sputnik</option>
+    </select>
+   
     
-     
-     <select name="Priority" id="Priority">
-       <option value="">Priority</option>
-       <option value="p0">p0</option>
-       <option value="p1">p1</option>
-       <option value="p2">p2</option>
-       <option value="p3">p3</option>
-     </select>
- 
-     <select name="Age" id="ageSort">
-       <option value="">Sort By Age</option>
-        <option value="20">18 - 30</option>
-        <option value="30"> 31 - 40</option>
-     </select>
+    <select name="Priority" id="Priority">
+      <option value="">Priority</option>
+      <option value="p0">p0</option>
+      <option value="p1">p1</option>
+      <option value="p2">p2</option>
+      <option value="p3">p3</option>
+    </select>
+
+    <select name="Age" id="ageSort">
+      <option value="">Sort By Age</option>
+       <option value="Min">Min - Max</option>
+       <option value="Max">Max - Min</option>
+    </select>
 
      <div id="container"> 
         <table>
@@ -78,13 +78,103 @@
     </div>
     `
 
-    let vacData = JSON.parse(localStorage.getItem("Vaccinated-list"))||[]
+ 
+
+
+
+    let userData = JSON.parse(localStorage.getItem("Vaccinated-list"))||[]
     let tbody= document.getElementById("vaccinated_table")
+
+
     
-    function displayData(){
+    let PrioritySelect = document.getElementById("Priority")
+
+    let Vselect = document.getElementById("vaccineFilter")
+
+    let ageSort = document.getElementById("ageSort")
+
+    Vselect.addEventListener("change",()=>{
+      let value = Vselect.value
+       userData=JSON.parse(localStorage.getItem("Vaccinated-list"))
+
+       if(value =="Covishield"){
+        userData = userData.filter((user)=> user.Vaccine =="Covishield")
+        showUser()
+      }
+
+      if(value =="Covaxin"){
+        userData = userData.filter((user)=> user.Vaccine =="Covaxin")
+        showUser()
+      }
+
+      if(value =="Sputnik"){
+        userData = userData.filter((user)=> user.Vaccine =="Sputnik")
+        showUser()
+      }
+ 
+     
+    })
+    
+
+
+// filter part priprity
+    PrioritySelect.addEventListener("change",()=>{
+      let value = PrioritySelect.value
+
+      userData = JSON.parse(localStorage.getItem("userData"))
+
+      if(value =="p0"){
+        userData = userData.filter((user)=> user.Priority =="p0")
+        showUser()
+      }
+
+      if(value =="p1"){
+        userData = userData.filter((user)=> user.Priority =="p1")
+        showUser()
+      }
+
+      if(value =="p2"){
+        userData = userData.filter((user)=> user.Priority =="p2")
+        showUser()
+      }
+
+      if(value =="p3"){
+        userData = userData.filter((user)=> user.Priority =="p3")
+        showUser()
+      }
+      
+    
+    })
+
+
+    // age sorting
+
+    ageSort.addEventListener("change",()=>{
+      let value = ageSort.value
+      userData = JSON.parse(localStorage.getItem("userData"))
+
+      if(value =="Min"){
+        userData = userData.sort((a,b)=> a.age-b.age)
+        showUser()
+      }
+      else{
+        userData = userData.sort((a,b)=> b.age-a.age)
+        showUser()
+      }
+    })
+
+
+
+
+
+
+
+
+    
+    function showUser(){
       tbody.innerHTML= null
       
-      vacData.forEach((element,index) => {
+      userData.forEach((element,index) => {
         
         let tr = document.createElement("tr")
 
@@ -109,6 +199,6 @@
      
     }
 
-    displayData()
+    showUser()
 </script>
 </html>

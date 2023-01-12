@@ -24,8 +24,8 @@
 
     <select name="Age" id="ageSort">
       <option value="">Sort By Age</option>
-       <option value="20">18 - 30</option>
-       <option value="30"> 31 - 40</option>
+       <option value="Min">Min - Max</option>
+       <option value="Max">Max - Min</option>
     </select>
    <div id="container"> 
     <table>
@@ -73,11 +73,12 @@
   
     let tBody = document.getElementById("dashboard_user_table")
 
-    let vaccinated = []
 
     let PrioritySelect = document.getElementById("Priority")
 
     let Vselect = document.getElementById("vaccineFilter")
+
+    let ageSort = document.getElementById("ageSort")
 
     Vselect.addEventListener("change",()=>{
       let value = Vselect.value
@@ -97,10 +98,7 @@
         userData = userData.filter((user)=> user.Vaccine =="Sputnik")
         showUser()
       }
-      else{
-        alert("Data Not Found")
-        window.location.href="Dashboard.html"
-      }
+ 
      
     })
     
@@ -131,11 +129,25 @@
         userData = userData.filter((user)=> user.Priority =="p3")
         showUser()
       }
-      else{
-        alert("Data Not Found")
-        window.location.href="Dashboard.html"
-      }
+      
     
+    })
+
+
+    // age sorting
+
+    ageSort.addEventListener("change",()=>{
+      let value = ageSort.value
+      userData = JSON.parse(localStorage.getItem("userData"))
+
+      if(value =="Min"){
+        userData = userData.sort((a,b)=> a.age-b.age)
+        showUser()
+      }
+      else{
+        userData = userData.sort((a,b)=> b.age-a.age)
+        showUser()
+      }
     })
 
 
@@ -143,17 +155,8 @@
 
 
 
- 
 
-
-
-
-
-
-
-
-
-
+   let vaccinated = JSON.parse(localStorage.getItem("Vaccinated-list"))||[]
      function showUser(){
       tBody.innerHTML = null
         userData.map((element,index)   => {
@@ -185,12 +188,23 @@
         Add.addEventListener("click",()=>{
           vaccinated.push(element)
           localStorage.setItem("Vaccinated-list",JSON.stringify(vaccinated))
-          
+
+          alert(`${element.name}  Added to Queue`)
+
+          setTimeout(()=>{
+           alert(`Vaccinating ${element.Vaccine} `)
+          },5000)
+
+          setTimeout(()=>{
+           alert(`${element.name} Vaccinated `)
+          },10000)
+
+
           userData.splice(index,1)
           localStorage.setItem("userData",JSON.stringify(userData))
 
           showUser()
-          alert("Succsesfully vaccinated")
+         
        })
 
        Delete.addEventListener("click",()=>{

@@ -73,9 +73,9 @@
               <input type="submit" value="Register" class="submitbtn"> 
     </form>
         `
-        let userData =JSON.parse(localStorage.getItem("userData")) || []
+        let formData =JSON.parse(localStorage.getItem("userData")) || []
         let myForm = document.getElementById("form")
-        let formData = []
+        
 
         myForm.addEventListener("submit", function(e) {
            e.preventDefault()
