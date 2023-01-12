@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccinated_people</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <nav id="navbar"></nav>
+
+    <select id="vaccineFilter">
+       <option value="">Select Vaccine</option>
+       <option value="Covishield ">Covishield </option>
+       <option value="Medium">Covaxin </option>
+       <option value="Sputnik">Sputnik</option>
+     </select>
+    
+     
+     <select name="Priority" id="Priority">
+       <option value="">Priority</option>
+       <option value="p0">p0</option>
+       <option value="p1">p1</option>
+       <option value="p2">p2</option>
+       <option value="p3">p3</option>
+     </select>
+ 
+     <select name="Age" id="ageSort">
+       <option value="">Sort By Age</option>
+        <option value="20">18 - 30</option>
+        <option value="30"> 31 - 40</option>
+     </select>
+
+     <div id="container"> 
+        <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Designation</th>
+                <th>Priority</th>
+                <th>vaccine</th>
+                
+              </tr>
+            </thead>
+            <tbody id="vaccinated_table">
+               <h1 id="regtext">successfully vaccinated</h1>
+              
+            </tbody>
+          </table>
+    
+        </div>
+       
+    
+</body>
+
+<script>
+     let navbar = document.getElementById("navbar")
+    let detailsSection = document.getElementById("registration_details")
+    let alertText = document.getElementById("h1text")
+
+   
+
+    navbar.innerHTML= `
+     <div id="registration"> 
+        <a href="index.html">Registration </a> 
+    </div  >
+   
+    <div id="Dashboard"> 
+        <a href="Dashboard.html">Dashboard </a> 
+    </div>
+    
+    <div id="Vaccinated"> 
+        <a href="Vaccinated.html">Vaccinated </a> 
+    </div>
+    `
+
+    let vacData = JSON.parse(localStorage.getItem("Vaccinated-list"))||[]
+    let tbody= document.getElementById("vaccinated_table")
+    
+    function displayData(){
+      tbody.innerHTML= null
+      
+      vacData.map(element => {
+        
+        let tr = document.createElement("tr")
+
+         let Id = document.createElement("td")
+         let Name = document.createElement("td")
+         let Age = document.createElement("td")
+         let Designation = document.createElement("td")
+         let Priority = document.createElement("td")
+         let vaccine = document.createElement("td")
+
+         Id.innerText = element.id ;
+         Name.innerText= element.name;
+         Age.innerText = element.age;
+         Designation.innerText = element.Designation;
+         Priority.innerText = element.Priority;
+         vaccine.innerText = element.Vaccine;
+
+         tr.append(Id,Name,Age,Designation,Priority,vaccine)
+         tbody.append(tr)
+      });
+
+    }
+
+    displayData()
+</script>
+</html>

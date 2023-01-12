@@ -6,15 +6,27 @@
   <body>
     <nav id="navbar"></nav>
 
-    
-<!--     
-    <select id="filter">
-      <option value="">Select Priority</option>
-      <option value="Low">Low</option>
-      <option value="Medium">Medium</option>
-      <option value="High">High</option>
+   <select id="vaccineFilter">
+      <option value="">Select Vaccine</option>
+      <option value="Covishield ">Covishield </option>
+      <option value="Medium">Covaxin </option>
+      <option value="Sputnik">Sputnik</option>
     </select>
-    <h1>Total Task:- <span id="task-count">0</span></h1> -->
+   
+    
+    <select name="Priority" id="Priority">
+      <option value="">Priority</option>
+      <option value="p0">p0</option>
+      <option value="p1">p1</option>
+      <option value="p2">p2</option>
+      <option value="p3">p3</option>
+    </select>
+
+    <select name="Age" id="ageSort">
+      <option value="">Sort By Age</option>
+       <option value="20">18 - 30</option>
+       <option value="30"> 31 - 40</option>
+    </select>
    <div id="container"> 
     <table>
         <thead>
@@ -52,16 +64,17 @@
     </div>
     
     <div id="Vaccinated"> 
-        <a href="">Vaccinated </a> 
+        <a href="Done.html">Vaccinated </a> 
     </div>
     `
 
-
-    let userData = JSON.parse(localStorage.getItem("vaccine-data"))||[]
+    let vaccinated = []
+    let userData = JSON.parse(localStorage.getItem("userData"))||[]
   
     let tBody = document.getElementById("dashboard_user_table")
      function showUser(){
-        userData.map(element => {
+      tBody.innerHTML = null
+        userData.map((element,index)   => {
          let tr = document.createElement("tr")
 
          let Id = document.createElement("td")
@@ -84,6 +97,26 @@
          vaccine.innerText = element.Vaccine;
          Add.innerText = "Vaccinate"
          Delete.innerText = "Delete"
+
+
+
+        Add.addEventListener("click",()=>{
+          vaccinated.push(element)
+          console.log(vaccinated);
+          localStorage.setItem("Vaccinated-list",JSON.stringify(vaccinated))
+          
+          userData.splice(index,1)
+          localStorage.setItem("userData",JSON.stringify(userData))
+          showUser()
+          alert("Succsesfully vaccinated")
+       })
+
+       Delete.addEventListener("click",()=>{
+          userData.splice(index,1)
+          localStorage.setItem("userData",JSON.stringify(userData))
+          showUser()
+          alert("user deleted")
+       })
 
          tr.append(Id,Name,Age,Designation,Priority,vaccine,Add,Delete)
          tBody.append(tr)
